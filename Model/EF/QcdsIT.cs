@@ -39,17 +39,20 @@ namespace Model.EF
         public string ThoiGianD { get; set; }
 
         [StringLength(50)]
-        public string SuCoA { get; set; }
+        public string SuCo { get; set; }
 
         [StringLength(50)]
-        public string SuCoB { get; set; }
+        public string DanhGiaA { get; set; }
 
         [StringLength(50)]
-        public string SuCoC { get; set; }
+        public string DanhGiaB{ get; set; }
+        [StringLength(50)]
+        public string DanhGiaC { get; set; }
 
         [Column(TypeName = "ntext")]
         public string YKien { get; set; }
 
         public int? UserName { get; set; }
     }
+    
 }

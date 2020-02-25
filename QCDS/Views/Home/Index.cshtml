@@ -1,8 +1,9 @@
-﻿
+﻿@model Model.EF.QcdsIT
 @{
-        ViewBag.Title = "Trang Chủ";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
 
 <!-- MultiStep Form -->
 <div class="container-fluid" id="grad1">
@@ -13,7 +14,8 @@
                 <p>Điền thông tin theo mẫu bên dưới và bấm tiếp tục để hoàn thành</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform">
+                        <form id="msform" action="@Url.Action("Index","Home")" method="post">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Thông tin</strong></li>
@@ -40,66 +42,89 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-3">
-                                            <label class="pay"> Bộ phận*</label>
+                                            @Html.LabelFor(model => model.BoPhan, "Bộ Phận : ", new { @class = "pay" })
                                         </div>
                                         <div class="col-9">
-                                            <input type="text" name="uname" placeholder="Bộ Phận" />
+                                            @Html.TextBoxFor(m => m.BoPhan, new { @class = "form-control", @placeholder = "Bộ phận  " })
+                                            @Html.ValidationMessageFor(m => m.Khoi, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-3">
-                                            <label class="pay"> Bạn là :*</label>
+                                            @Html.LabelFor(model => model.BanLa, "Bạn Là : ", new { @class = "pay" })
                                         </div>
                                         <div class="col-9">
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio1">JP</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BanLa, "JP", true) JP
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio1">GL</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BanLa, "GL", true) GL
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio1">TL</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BanLa, "TL", true) TL
+                                                        </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio1">Nhân viên</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BanLa, "Nhân viên", true) Nhân viên
+                                                        </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio1">Công nhân</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BanLa, "Công nhân", true) Công nhân
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.BanLa)
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
-                                            <label class="pay"> Bạn làm OVNC được bao lâu :*</label>
+                                            @Html.LabelFor(model => model.BaoLau, "Bạn làm OVNC được bao lâu :* ", new { @class = "pay" })
                                         </div>
                                         <div class="col-9">
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">Dưới 1 năm</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BaoLau, "Dưới 1 năm", true) Dưới 1 năm
+                                                        </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1-2 năm</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BaoLau, "1-2 năm", false) 1-2 năm
+                                                        </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2-3 năm</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BaoLau, "2-3 năm", false) 2-3 năm
+                                                        </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3-4 năm</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BaoLau, "3-4 năm", false) 3-4 năm
+                                                        </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">Trên 5 năm</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.BaoLau, "Trên 5 năm", false) Trên 5 năm
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.BaoLau)
                                     </div>
                                 </div>
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
@@ -120,24 +145,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">>3 lần</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.LienLac, "> 3 lần", false) > 3 lần
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3 lần</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.LienLac, "3 lần", false) 3 lần
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2 lần</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.LienLac, "2 lần", false) 2 lần
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1 lần</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.LienLac, "1 lần", false) 1 lần
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">0 lần</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.LienLac, "0 lần", false) 0 lần
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.LienLac)
                                     </div>
                                     <label class="pay text-center text-danger">
                                         2. Thời gian mà IT giải quyết yêu cầu của bạn?
@@ -152,24 +188,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">> 4 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianA, "> 4 Ngày", false) > 4 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianA, " 4 Ngày", false) 4 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianA, " 3 Ngày", false) 3 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianA, " 2 Ngày", false) 2 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianA, " 1 Ngày", false) 1 Ngày
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.ThoiGianA)
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
@@ -181,24 +228,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">> 4 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianB, "> 4 Ngày", false) > 4 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianB, " 4 Ngày", false) 4 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianB, " 3 Ngày", false) 3 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianB, " 2 Ngày", false) 2 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianB, " 1 Ngày", false) 1 Ngày
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.ThoiGianB)
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
@@ -210,24 +268,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">> 4 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianC, "> 4 Ngày", false) > 4 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianC, " 4 Ngày", false) 4 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianC, " 3 Ngày", false) 3 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianC, " 2 Ngày", false) 2 Ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianC, " 1 Ngày", false) 1 Ngày
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.ThoiGianC)
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
@@ -239,24 +308,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">> 18 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianD, "> 18 ngày", false)> 18 ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">18 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianD, " 18 ngày", false) 18 ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">15 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianD, " 15 ngày", false) 15 ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">7 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianD, " 7 ngày", false) 7 ngày
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3 ngày</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.ThoiGianD, " 3 ngày", false) 3 ngày
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.ThoiGianD)                                   
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
@@ -268,24 +348,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.SuCo, " 1", false) 1
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.SuCo, " 2", false) 2
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.SuCo, " 3", false) 3
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.SuCo, " 4", false) 4
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">5</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.SuCo, " 5", false) 5
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.SuCo)
                                     </div>
                                     <label class="pay text-center text-danger">
                                         4. Đánh giá người phục vụ.
@@ -300,24 +391,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaA, " 1", false) 1
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaA, " 2", false) 2
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaA, " 3", false) 3
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaA, " 4", false) 4
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">5</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaA, " 5", false) 5
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.DanhGiaA)
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
@@ -329,24 +431,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaB, " 1", false) 1
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaB, " 2", false) 2
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaB, " 3", false) 3
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaB, " 4", false) 4
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">5</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaB, " 5", false) 5
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.DanhGiaB)
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
@@ -358,24 +471,35 @@
                                             <div class="radio-group">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">1</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaC, " 1", false) 1
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">2</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaC, " 2", false) 2
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">3</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaC, " 3", false) 3
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">4</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaC, " 4", false) 4
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <label class="radio-inline"><input type="radio" name="optradio">5</label>
+                                                        <div class="form-check text-center">
+                                                            @Html.RadioButtonFor(model => model.DanhGiaC, " 5", false) 5
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.DanhGiaC)
                                     </div>
                                 </div>
                                 <input type="button" name="previous" class="previous action-button-previous" value="Quay lại" />
@@ -386,7 +510,8 @@
                                     <h2 class="fs-title">Các ý kiến đóng góp khác</h2>
                                     <div class="form-group">
                                         <label for="comment">Ý kiến:</label>
-                                        <textarea class="form-control" rows="5" id="comment" placeholder="Nội dung ý kiến/góp ý của bạn"></textarea>
+                                        @Html.TextAreaFor(m => m.YKien, new { @class = "form-control", @placeholder = " Ý KIẾN (Ghi chú/ Note: Các mục chọn <=2 điểm, vui lòng cho biết lý do) " })
+                                        @Html.ValidationMessageFor(m => m.YKien, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <input type="button" name="previous" class="previous action-button-previous" value="Quay lại" />
